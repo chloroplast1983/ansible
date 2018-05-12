@@ -1,0 +1,33 @@
+# install packages 
+- name: install required packages
+  yum: name={{item}} state=latest
+  with_items:
+    - vim
+    - net-tools
+    - ntp
+
+- name: copy ntpd config
+  template: 
+    src: ntp.conf.j2 
+    dest: /etc/ntp.conf
+
+- name: enable ntpd service
+  systemd:
+    name: ntpd
+    enabled: yes
+    state: started
+
+- name: disable firewalld service
+  systemd:
+    name: firewalld
+    enabled: no
+    state: stopped
+
+- name: enable net.ipv4.ip_forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+    reload: yes
+  tags:
+    - sysctl

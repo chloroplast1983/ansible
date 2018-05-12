@@ -1,0 +1,14 @@
+# expire password
+- name: expire password
+  include: user_password_expire.yml
+
+# configure password complexity
+- name: configure password complexity
+  include: password_complexity.yml
+
+# configure password fail lock
+- name: configure password fail lock in system-auth file
+  include: password_fail_lock_system_auth.yml
+
+- name: configure password fail lock in password-auth file
+  include: password_fail_lock_password_auth.yml

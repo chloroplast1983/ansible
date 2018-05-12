@@ -1,0 +1,33 @@
+# 关闭selinux
+- name: close selinux
+  selinux: state=disabled
+
+- name: disable firewalld.service
+  systemd:
+    name: firewalld
+    enabled: no
+    state: stopped
+
+#创建可以登录ssh的用户组
+- name: make sure we have a 'sshalow' group, you can join sshalow group and ssh server
+  group:
+    name: sshallow
+    state: present
+
+#赋予ansible用户sshalow用户组
+- name: add sshalow group to ansible user
+  user:
+    name: ansible
+    groups: sshallow
+    append: yes
+
+#复制 /etc/ssh/sshd_config 配置文件
+- name: copy sshd_config
+  template:
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: 0600
+    
+#sshd 服务重启触发器
+- name: restart sshd
+  service: name=sshd state=restarted

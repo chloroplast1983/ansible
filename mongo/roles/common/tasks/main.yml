@@ -1,0 +1,58 @@
+# 关闭tuned
+- name: stop tuned
+  systemd:
+    name: tuned
+    enabled: no
+    state: stopped
+
+# 关闭 Transparent Huge Pages Settings
+- name: copy THP script
+  template: 
+    src: disable-transparent-hugepages.j2
+    dest: /etc/init.d/disable-transparent-hugepages
+    mode: 0755
+
+- name: enable disable-transparent-hugepages service
+  command: chkconfig --add disable-transparent-hugepages
+
+- name: limits
+  include: limits.yml
+
+- name: sysctl
+  include: sysctl.yml
+
+- name: install git
+  yum: name=git state=present
+
+- name: add mongodb group
+  group:
+    name: mongodb
+    state: present
+    gid: 1010
+
+- name: add mongodb user
+  user:
+    name: mongodb
+    state: present
+    uid: 1010
+    group: mongodb
+    shell: /sbin/nologin
+
+# 把我们的操作用户添加入 mongodb 组
+- name: add mongodb group to ansible user
+  user:
+    name: ansible
+    groups: mongodb
+    append: yes
+
+- name: create mongo directires
+  file:
+    path: '/data/mongodb/{{ item }}'
+    state: directory
+    owner: mongodb
+    group: mongodb
+    mode: 0750
+  with_items:
+    - ca
+    - data
+    - config

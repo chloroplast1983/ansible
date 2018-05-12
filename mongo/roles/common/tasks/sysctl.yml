@@ -1,0 +1,39 @@
+# 设置 net.ipv4.tcp_keepalive_time 300
+- name: set net.ipv4.tcp_keepalive_time
+  sysctl:
+    name: net.ipv4.tcp_keepalive_time
+    value: 300
+    state: present
+    reload: yes
+  tags:
+    - sysctl
+
+# 设置 fs.file-max 98000
+- name: set fs.file-max 98000
+  sysctl:
+    name: fs.file-max
+    value: 98000
+    state: present
+    reload: yes
+  tags:
+    - sysctl
+
+# 设置 kernel.pid_max 64000
+- name: set kernel.pid_max 64000
+  sysctl:
+    name: kernel.pid_max
+    value: 64000
+    state: present
+    reload: yes
+  tags:
+    - sysctl
+
+# 设置 kernel.threads-max 64000
+- name: set kernel.threads-max 64000
+  sysctl:
+    name: kernel.threads-max
+    value: 64000
+    state: present
+    reload: yes
+  tags:
+    - sysctl

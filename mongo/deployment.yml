@@ -1,0 +1,5 @@
+- name: deploy mongo environment
+  hosts: servers
+  become: true
+  roles:
+    - common

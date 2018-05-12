@@ -1,0 +1,3 @@
+# 修改主机名称,主机名称从主机变量获取
+- hostname: name={{ host_name }}
+  become: True 

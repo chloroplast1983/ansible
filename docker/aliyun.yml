@@ -1,0 +1,6 @@
+- name: deploy aliyun server
+  hosts: aliyunserver
+  become: true
+  roles:
+    - common
+    - docker

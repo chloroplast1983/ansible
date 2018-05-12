@@ -1,0 +1,6 @@
+# 安装docker
+- name: install docker
+  include: docker.yml 
+
+# 修改sysctl.conf
+- include: modify-sysctlconf

@@ -1,0 +1,6 @@
+#部署 rancher server 节点
+- name: deploy rancher server
+  hosts: servers
+  become: true
+  roles: 
+    - fluentd

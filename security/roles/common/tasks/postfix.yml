@@ -1,0 +1,6 @@
+#disable postfix.service
+- name: disable postfix.service
+  systemd:
+    name: postfix
+    enabled: no
+    state: stopped

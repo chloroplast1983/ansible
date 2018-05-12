@@ -1,0 +1,24 @@
+# set sysctl file limiits
+# fsize : file size
+# cpu : cpu time
+# as : virtual memory size
+# nofile : open files
+# nproc : processes/threads
+- name: set sysctl file limits
+  pam_limits:
+    dest: "{{ item.dest }}"
+    domain: '{{ item.domain }}'
+    limit_type: "{{ item.limit_type }}"
+    limit_item: "{{ item.limit_item }}"
+    value: "{{ item.value }}"
+  with_items:
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'fsize', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'fsize', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'cpu', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'cpu', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'as', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'as', value: 'unlimited'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'nproc', value: '64000'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'nproc', value: '64000'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'nofile', value: '64000'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'nofile', value: '64000'}

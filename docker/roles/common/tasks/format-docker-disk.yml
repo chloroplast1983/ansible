@@ -1,0 +1,49 @@
+# 硬盘分区
+- name: lvm docker disk partion
+  script: lvm-disk.sh "{{ disk }}" "{{ disk_docker_partion }}" "{{ disk_docker_size }}"
+  ignore_errors: yes
+
+- name: partprobe
+  command: partprobe
+
+# 检查分区是是否已经创建
+- name: check lvm 
+  command: lvdisplay -c
+  register: lvminfo
+
+# 创建 pv
+- name: create pv
+  command: pvcreate "{{ disk }}{{ disk_docker_partion }}"
+  when: lvminfo.stdout.find('docker') == -1
+
+# 创建 vg
+- name: create vg
+  command: vgcreate docker "{{ disk }}{{ disk_docker_partion }}"
+  when: lvminfo.stdout.find('docker') == -1
+
+# 创建 lvm:thinpool
+- name: create lvm thinpool
+  command: lvcreate --wipesignatures y -n thinpool docker -l 95%VG
+  when: lvminfo.stdout.find('docker') == -1
+
+# 创建 lvm:thinpoolmeta
+- name: crate lvm thinpoolmeta
+  command: lvcreate --wipesignatures y -n thinpoolmeta docker -l 1%VG
+  when: lvminfo.stdout.find('docker') == -1
+
+# 转换 lvm:thinpool to thinpool 和 lvm:thinpoolmeta to poolmetadata
+- name: convert to thinpool and thinpoolmeta
+  command: lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta
+  when: lvminfo.stdout.find('docker') == -1
+
+# 复制 docker-thinpool.profile 配置文件
+- name: copy docker-thinpool.profile
+  template:
+    src: docker-thinpool.profile.j2
+    dest: /etc/lvm/profile/docker-thinpool.profile
+  when: lvminfo.stdout.find('docker') == -1
+
+  # 更新配置, 这个需要更新包, 低版本没有 --metadataprofile 选项
+- name: lvchange docker thinpool
+  command: lvchange --metadataprofile docker-thinpool docker/thinpool
+  when: lvminfo.stdout.find('docker') == -1

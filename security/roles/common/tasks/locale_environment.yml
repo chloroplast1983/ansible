@@ -1,0 +1,8 @@
+#复制environment到/etc/environment, 设置语言环境配置文件
+- name: set locale environment
+  copy:
+    src: files/environment
+    dest: /etc/environment
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,27 @@
+# enable auditd 服务
+- name: enable quditd service
+  include: autid.yml
+
+# disable positfix 服务
+- name: disable positfix service
+  include: postfix.yml
+
+# configure sshd 服务
+- name: configure sshd service
+  include: sshd.yml
+
+# 更新locale语言环境变量
+- name: config locale environment
+  include: locale_environment.yml
+
+# disable ping
+- name: disable ping
+  include: disable_ping.yml
+
+# configure connection timeout
+- name: configure time out 
+  include: tmout.yml
+
+# configure sysctl limits
+- name: configure sysctl limits
+  include: limits.yml

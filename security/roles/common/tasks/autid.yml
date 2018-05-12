@@ -1,0 +1,6 @@
+#enable auditd.service
+- name: enable auditd.service
+  systemd:
+    name: auditd
+    enabled: yes
+    state: started

@@ -1,0 +1,16 @@
+# set sysctl file limiits
+- name: set sysctl file limits
+  pam_limits:
+    dest: "{{ item.dest }}"
+    domain: '{{ item.domain }}'
+    limit_type: "{{ item.limit_type }}"
+    limit_item: "{{ item.limit_item }}"
+    value: "{{ item.value }}"
+  with_items:
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'nproc', value: '65535'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'nproc', value: '65535'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'soft',limit_item: 'nofile', value: '65535'}
+    - {dest: '/etc/security/limits.conf', domain: '*', limit_type: 'hard',limit_item: 'nofile', value: '65535'}
+    - {dest: '/etc/security/limits.conf', domain: '@sshallow', limit_type: 'hard',limit_item: 'maxlogins', value: '4'}
+    - {dest: '/etc/security/limits.d/20-nproc.conf', domain: '*', limit_type: 'soft',limit_item: 'nproc', value: '65535'}
+    - {dest: '/etc/security/limits.d/20-nproc.conf', domain: '*', limit_type: 'hard',limit_item: 'nproc', value: '65535'}

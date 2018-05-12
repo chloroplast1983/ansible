@@ -1,0 +1,8 @@
+#复制tmout.sh到/etc/profile.d/, 设置登录超时时间
+- name: set TMOUT variable, TMOUT variable in bash will terminate the shell if there is no activity for N seconds
+  copy:
+    src: files/tmout.sh
+    dest: /etc/profile.d/tmout.sh
+    owner: root
+    group: root
+    mode: 0644

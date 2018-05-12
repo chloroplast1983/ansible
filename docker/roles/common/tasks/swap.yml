@@ -1,0 +1,23 @@
+#创建交换分区存储文件夹
+- name: create swap file dir
+  file: path=/data/swap state=directory mode=0755
+
+#创建交换分区文件
+- name: create swap file
+  command: "dd if=/dev/zero of=/data/swap/swap-file  bs=1k count={{ swap_size }} creates=/data/swap/swap-file"
+
+- name: check swap file type    
+  command: file /data/swap/swap-file
+  register: swapfile
+
+- name: make swap
+  command: mkswap /data/swap/swap-file
+  when: swapfile.stdout.find('swap file') == -1
+   
+- name: swapon
+  command: swapon /data/swap/swap-file 
+  when: ansible_swaptotal_mb < 1
+
+#挂载交换分区
+- name: mount swap
+  mount: name=/data/swap/swap-file src=swap fstype=swap state=present

@@ -1,0 +1,7 @@
+# 部署安全测试脚本
+- name: configure servers sercurity environment
+  hosts: servers
+  become: true
+  roles: 
+    - common
+    - password

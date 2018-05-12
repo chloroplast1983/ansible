@@ -1,0 +1,50 @@
+# 安装 docker 的 yum 源 (docker ce)
+- name: install docker ce repo
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 安装 docker-ce-17.06.2.ce
+- name: install docker ce-17.09.1.ce
+  yum: name=docker-ce-17.09.1.ce state=present
+
+# 开机启动docker
+- name: systemctl enable docker.service
+  command: systemctl enable docker.service
+
+# 添加 docker 用户组
+- name: make sure we have a 'docker' group, user can join docker group and run docker with non-root
+  group:
+    name: docker
+    state: present
+
+# 把我们的操作用户添加入 docker 组
+- name: add docker group to ansible user
+  user:
+    name: ansible
+    groups: docker
+    append: yes
+
+# 修改 docker 配置文件 (docker ce)
+# 创建配置文件夹
+- name: copy docker config file
+  template: 
+    src: docker.service.j2
+    dest: /usr/lib/systemd/system/docker.service
+
+# 更新docker存储引擎配置文件
+- name: cretae docker storage config file dir
+  file: path=/etc/docker state=directory mode=0755
+
+- name: set up docker storage driver devicemapper
+  template:
+    src: docker.daemon.json.j2
+    dest: /etc/docker/daemon.json
+
+# 重新加载docker配置
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload
+
+# 启动服务
+- name: restart docker
+  service: name={{ item }} state=started
+  with_items:
+    - docker

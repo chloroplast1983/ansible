@@ -1,0 +1,22 @@
+# 更新docker存储引擎配置文件
+- name: cretae fluentd file
+  file: path=/data/fluentd state=directory mode=0755
+  tags:
+    - fluentd
+
+- name: sync config
+  copy:
+    src: fluentd.conf
+    dest: /data/fluentd/fluentd.conf
+  tags:
+    - fluentd
+
+- name: crontab clean docker images
+  cron:
+    name: "clean unused docker images"
+    state: present
+    user: ansible
+    hour: 3
+    job: "docker rmi `docker images | awk '{print $3}'` > /dev/null"
+  tags:
+    - cron

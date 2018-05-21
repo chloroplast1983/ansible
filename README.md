@@ -4,13 +4,12 @@
 
 ### 目录
 
-* dev : 开发主机部署,程序自己电脑集体部署剧本
-* k8s : 沙箱和生产的k8s部署剧本
-* rancher : 沙箱和生产的rancher部署剧本
-* repository : docker 私有仓库部署剧本,现在暂时使用阿里云的私有仓库.暂不使用.
-* docker : 用于在服务器部署`dokcer`.
+* [mongo](./mongo) : 用于根据`mongo`的生产配置推荐修改服务器.
+* [operate](./operate) : 用于批量修改操作服务器.
+* [docker](./docker) : 用于在服务器部署`dokcer`.
 	* 阿里云版本
 	* 虚拟机版本
+* [security](./security) : 用于在服务器的安全方面部署工作.
 
 ### 使用前要准备的工作
 
@@ -60,25 +59,9 @@
 
 ### 剧本
 
-#### dev
-
-主要用于部署我们的开发电脑,详细见 [dev play book](./dev "dev play book")
-
-#### k8s
-
-主要用于k8s的`master`和`minon`节点部署,详细见 [k8s play book](./k8s "k8s play book")
-
-#### rancher
-
-主要用于rancher的`server`和`agent`节点部署,详细见 [rancher play book](./rancher "rancher play book")
-
 #### security
 
 主要用于部署服务器安全性的剧本,在给服务器添加用ansible用户后(上述操作),运行该脚本统一配置服务器的一些安全化设置,详细见 [security play book](./security "security play book")
-
-#### repository
-
-仓库服务器,暂时因为使用阿里云的容器仓库,这个暂时不做更新.
 
 #### docker
 

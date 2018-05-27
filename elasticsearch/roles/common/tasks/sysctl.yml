@@ -7,3 +7,11 @@
     reload: yes
   tags:
     - sysctl
+
+# 开启ping
+- name: enable ping
+  sysctl:
+    name: net.ipv4.icmp_echo_ignore_all
+    value: 1
+    state: present
+    reload: yes

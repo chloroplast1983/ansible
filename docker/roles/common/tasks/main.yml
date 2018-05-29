@@ -18,6 +18,3 @@
 
 # 格式化数据盘
 - include: format-data-disk.yml
-
-# 创建交换分区
-- include: swap.yml

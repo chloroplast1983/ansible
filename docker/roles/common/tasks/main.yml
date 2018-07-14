@@ -13,6 +13,9 @@
 - name: close selinux
   selinux: state=disabled
 
+# 修改内核参数
+- include: modify-sysctlconf
+
 # 格式化docker 精简池
 - include: format-docker-disk.yml
 

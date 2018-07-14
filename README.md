@@ -23,14 +23,14 @@
 
 连续输入服务器的`ip`地址和`ansible`账户的密码.
 
-连续输入ansible账户对应该台服务器的密码即可.
+连续输入`ansible`账户对应该台服务器的密码即可.
 
 该文件执行了如下操作:
 
 * 添加`ansible`账户
 * 为`ansible`账户设定密码
 * 把`ansible`加入到`wheel`组
-* 修改`/etc/sudoers`让`wheel`组的用户执行`sudo`时不用输入密码,主要用于ansible剧本的自动执行.
+* 修改`/etc/sudoers`让`wheel`组的用户执行`sudo`时不用输入密码,主要用于`ansible`剧本的自动执行.
 * 本机到目标服务器对于ansible用户进行`ssh免密码登陆`
 
 #### 执行security剧本
@@ -61,9 +61,9 @@
 
 #### security
 
-主要用于部署服务器安全性的剧本,在给服务器添加用ansible用户后(上述操作),运行该脚本统一配置服务器的一些安全化设置,详细见 [security play book](./security "security play book")
+主要用于部署服务器安全性的剧本,在给服务器添加用ansible用户后(上述操作),运行该脚本统一配置服务器的一些安全化设置,详细见[security play book](./security "security play book")
 
 #### docker
 
-主要用于在服务器部署`docker`的生产环境. 针对`linux`版本为`centos 7 min` [docker play book](./docker "docker play book")
+主要用于在服务器部署`docker`的生产环境. 针对`linux`版本为`centos 7 min`[docker play book](./docker "docker play book")
 ## 

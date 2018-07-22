@@ -142,6 +142,7 @@ LC_ALL=zh_CN.utf8
 ### 2.2
 
 #### 修改`/etc/environment`为空, 解决在虚拟机里面默认为中文而显示乱码的情况
+
 #### 修改`security.sh`脚本
 
 从`passwd`文件读取密码. 如果密码包含特殊字符需要外围用双引号包围起来.
@@ -162,3 +163,9 @@ LC_ALL=zh_CN.utf8
 否则会重启失败.
 
 更新`limits.conf`修改限制最大系统登录用户为限制最大登录用户组`sshallow`为`2`次. 
+
+### 2.4
+
+#### 修改`include`为`include_tasks`
+
+`include`被`deprecated`了.

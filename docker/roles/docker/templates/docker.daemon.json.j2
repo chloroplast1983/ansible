@@ -3,5 +3,10 @@
   "storage-opts": [
   "dm.thinpooldev=/dev/mapper/docker-thinpool",
   "dm.use_deferred_removal=true"
-  ]
+  ],
+  "log-driver": "json-file",
+  "log-opts": {
+  "max-size" : "10m",
+  "max-file" : "5"
+  }
 }

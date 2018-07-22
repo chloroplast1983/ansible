@@ -128,3 +128,9 @@ Uncaught MongoDB\Driver\Exception\RuntimeException: not authorized on test to ex
 ### 1.0
 
 初始化剧本.
+
+### 1.1
+
+#### 修改`include`为`include_tasks`
+
+`include`被`deprecated`了.

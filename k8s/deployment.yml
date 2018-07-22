@@ -1,0 +1,5 @@
+- name: deploy k8s environment
+  hosts: servers
+  become: true
+  roles:
+    - common

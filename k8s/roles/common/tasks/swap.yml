@@ -1,0 +1,11 @@
+# 永久不挂载swap
+- name: Remove swapfile from /etc/fstab
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+# 如果已经挂载swap分区, 取消挂载
+- name: Disable swap
+  command: swapoff -a
+  when: ansible_swaptotal_mb > 0

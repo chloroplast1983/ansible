@@ -16,10 +16,10 @@
   command: chkconfig --add disable-transparent-hugepages
 
 - name: limits
-  include: limits.yml
+  include_tasks: limits.yml
 
 - name: sysctl
-  include: sysctl.yml
+  include_tasks: sysctl.yml
 
 - name: install git
   yum: name=git state=present

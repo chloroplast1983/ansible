@@ -11,10 +11,7 @@ Type=notify
 # for containers run by docker
 
 # docker-18.03
-# ExecStart=/usr/bin/dockerd --data-root=/data/docker --registry-mirror={{ registry_proxy }}
-
-# docker-17.03
-ExecStart=/usr/bin/dockerd --graph=/data/docker --registry-mirror={{ registry_proxy }}
+ExecStart=/usr/bin/dockerd --data-root=/data/docker --registry-mirror={{ registry_proxy }}
 
 ExecReload=/bin/kill -s HUP $MAINPID
 # Having non-zero Limit*s causes performance problems due to accounting overhead

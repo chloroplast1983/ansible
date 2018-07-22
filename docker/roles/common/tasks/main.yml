@@ -1,5 +1,5 @@
 # 修改hostname
-- include: hostname.yml
+- include_tasks: hostname.yml
 
 # install packages 
 - name: install required packages
@@ -14,10 +14,10 @@
   selinux: state=disabled
 
 # 修改内核参数
-- include: modify-sysctlconf
+- include_tasks: modify-sysctlconf
 
 # 格式化docker 精简池
-- include: format-docker-disk.yml
+- include_tasks: format-docker-disk.yml
 
 # 格式化数据盘
-- include: format-data-disk.yml
+- include_tasks: format-data-disk.yml

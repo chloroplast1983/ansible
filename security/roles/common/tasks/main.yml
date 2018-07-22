@@ -1,27 +1,27 @@
 # enable auditd 服务
 - name: enable quditd service
-  include: autid.yml
+  include_tasks: autid.yml
 
 # disable positfix 服务
 - name: disable positfix service
-  include: postfix.yml
+  include_tasks: postfix.yml
 
 # configure sshd 服务
 - name: configure sshd service
-  include: sshd.yml
+  include_tasks: sshd.yml
 
 # 更新locale语言环境变量
 - name: config locale environment
-  include: locale_environment.yml
+  include_tasks: locale_environment.yml
 
 # disable ping
 - name: disable ping
-  include: disable_ping.yml
+  include_tasks: disable_ping.yml
 
 # configure connection timeout
 - name: configure time out 
-  include: tmout.yml
+  include_tasks: tmout.yml
 
 # configure sysctl limits
 - name: configure sysctl limits
-  include: limits.yml
+  include_tasks: limits.yml

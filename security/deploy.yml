@@ -1,4 +1,4 @@
-# 部署安全测试脚本
+# 部署安全剧本
 - name: configure servers sercurity environment
   hosts: servers
   become: true

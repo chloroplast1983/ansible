@@ -1,0 +1,14 @@
+- name: disable firewalld service
+  systemd:
+    name: firewalld
+    enabled: no
+    state: stopped
+
+- name: enable net.ipv4.ip_forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+    reload: yes
+  tags:
+    - sysctl

@@ -26,7 +26,7 @@
   lvol:
     vg: data
     lv: data
-    size: 100%FREE
+    size: 90%FREE
   when: lvminfo.stdout.find('data') == -1
 
 #格式化硬盘

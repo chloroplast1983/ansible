@@ -1,0 +1,47 @@
+# 安装 docker 的 yum 源 (docker ce)
+- name: install docker ce repo
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# 安装 docker-ce-17.09.1.ce
+- name: install docker ce-17.09.1.ce
+  yum: name=docker-ce-17.09.1.ce state=present disable_gpg_check=yes
+
+# 开机启动docker
+- name: systemctl enable docker.service
+  command: systemctl enable docker.service
+
+# 复制docker-compose
+- name: copy docker-compose
+  become: true
+  copy:
+    src: docker-compose
+    dest: /usr/bin/docker-compose
+    owner: root
+    group: root
+    mode: "u+x,g+x,o+x"
+
+# 添加 docker 用户组
+- name: make sure we have a 'docker' group, user can join docker group and run docker with non-root
+  group:
+    name: docker
+    state: present
+
+# 把我们的操作用户添加入 docker 组
+- name: add docker group to ansible user
+  user:
+    name: ansible
+    groups: docker
+    append: yes
+
+# 把我们的开发用户添加入 docker 组
+- name: add docker group to www-data user
+  user:
+    name: www-data
+    groups: docker
+    append: yes
+
+# 启动服务
+- name: restart docker
+  service: name={{ item }} state=started
+  with_items:
+    - docker

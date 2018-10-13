@@ -1,0 +1,7 @@
+- name: deploy virtual server
+  hosts: virtualserver
+  become: true
+  roles:
+    - virtual
+    - common
+    - docker

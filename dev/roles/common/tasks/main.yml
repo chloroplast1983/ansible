@@ -1,0 +1,19 @@
+# 关闭selinux
+- name: close selinux
+  selinux: state=disabled
+
+# 初始化必要用户
+- name: install user
+  include: user.yml 
+
+# install packages 
+- name: install required packages
+  yum: name={{item}} state=latest
+  with_items:
+    - yum-utils
+    - git
+    - ftp
+    - vim
+    - net-tools
+    - unzip
+    - ntpdate

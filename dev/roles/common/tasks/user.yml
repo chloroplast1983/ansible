@@ -1,0 +1,16 @@
+#- name: add www-data group
+#  group:
+#    name: www-data
+#    state: present
+#    gid: 33
+
+- name: add www-data user
+  user:
+    name: www-data
+    state: present
+    uid: 33
+    groups:
+      - wheel
+    append: yes
+    password: "{{ password | password_hash('sha512') }}"
+#    group: www-data

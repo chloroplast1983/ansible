@@ -1,4 +1,2 @@
-disk_docker_partion: 1
-disk_docker_size: "+10G"
-disk_data_partion: 2
+disk_data_partion: 1
 disk_data_mount_dir: "/data"

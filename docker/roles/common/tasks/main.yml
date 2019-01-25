@@ -16,8 +16,5 @@
 # 修改内核参数
 - include_tasks: modify-sysctlconf
 
-# 格式化docker 精简池
-- include_tasks: format-docker-disk.yml
-
 # 格式化数据盘
 - include_tasks: format-data-disk.yml

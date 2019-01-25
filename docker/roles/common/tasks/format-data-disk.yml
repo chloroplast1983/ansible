@@ -34,6 +34,7 @@
   filesystem: 
     fstype: xfs
     dev: "/dev/data/data"
+    opts: "-n ftype=1"
   become: true
 
 #挂载硬盘, 使用noatime, 不记录atime

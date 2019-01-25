@@ -2,10 +2,9 @@
 - name: install docker ce repo
   command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-# 安装 docker-ce-17.03.2.ce
-- name: install docker ce-17.03.2.ce
-  # yum: name=docker-ce-17.03.2.ce state=present
-  command: yum install -y --setopt=obsoletes=0 docker-ce-17.03.2.ce-1.el7.centos.x86_64 docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch
+# 安装 docker-ce-18.06.1.ce
+- name: install docker ce-18.06.1.ce
+  yum: name=docker-ce-18.06.1.ce state=present
 
 # 开机启动docker
 - name: systemctl enable docker.service
@@ -28,7 +27,7 @@
 # 创建配置文件夹
 - name: copy docker config file
   template: 
-    src: docker-170302.service.j2
+    src: docker.service.j2
     dest: /usr/lib/systemd/system/docker.service
 
 # 更新docker存储引擎配置文件

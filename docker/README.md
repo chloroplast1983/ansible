@@ -163,3 +163,12 @@ TCP发送keepalive探测消息的间隔时间(秒)，用于确认TCP连接是否
 `k8s`支持`docker`版本为`17.03.x`. 这里默认`ansible`部署为`17.03.2`
 
 `rancher-1.6.17`支持`docker`版本为`18.03.x-ce`. 如果需要部署`rancher 1.x`需要手动修改`docker`版本.
+
+### 1.4
+
+#### 升级`docker`版本为`18.06.1`
+
+`kubernetes`默认支持`docker`版本为`18.06.1`
+
+#### 修改`docker`的默认`storage driver`为`overlay2`
+

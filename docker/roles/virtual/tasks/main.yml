@@ -1,33 +1,10 @@
-# install packages 
-- name: install required packages
-  yum: name={{item}} state=latest
-  with_items:
-    - vim
-    - net-tools
-    - ntp
+# 安装offline环境
+- name: offline
+  include_tasks: offline.yml
 
-- name: copy ntpd config
-  template: 
-    src: ntp.conf.j2 
-    dest: /etc/ntp.conf
+# 安装online环境
+#- name: online
+#  include_tasks: online.yml
 
-- name: enable ntpd service
-  systemd:
-    name: ntpd
-    enabled: yes
-    state: started
-
-- name: disable firewalld service
-  systemd:
-    name: firewalld
-    enabled: no
-    state: stopped
-
-- name: enable net.ipv4.ip_forward
-  sysctl:
-    name: net.ipv4.ip_forward
-    value: 1
-    state: present
-    reload: yes
-  tags:
-    - sysctl
+- name: common
+  include_tasks: common.yml

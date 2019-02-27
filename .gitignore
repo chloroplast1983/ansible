@@ -5,3 +5,4 @@ host.yml
 *.hosts
 backup
 passwd
+*.tar.gz

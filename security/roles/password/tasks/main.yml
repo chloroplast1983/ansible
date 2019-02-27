@@ -1,6 +1,6 @@
 # expire password
-- name: expire password
-  include_tasks: user_password_expire.yml
+#- name: expire password
+#  include_tasks: user_password_expire.yml
 
 # configure password complexity
 - name: configure password complexity

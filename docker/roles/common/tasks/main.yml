@@ -1,14 +1,6 @@
 # 修改hostname
 - include_tasks: hostname.yml
 
-# install packages 
-- name: install required packages
-  yum: name={{item}} state=latest
-  with_items:
-    - lvm2
-    - yum-utils
-    - device-mapper-persistent-data
-
 # 关闭selinux
 - name: close selinux
   selinux: state=disabled

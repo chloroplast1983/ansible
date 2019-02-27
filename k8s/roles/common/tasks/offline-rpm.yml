@@ -1,0 +1,46 @@
+# 创建安装目录
+- name: create k8s install directory
+  file: path=/data/install state=directory mode=0755
+
+# 解压k8s rmp包
+- name: unarchive k8s rpm
+  unarchive:
+    src: k8s-rpm-1.13.3.tar.gz
+    dest: /data/install
+
+
+# 安装kubelet离线包
+- name: find kubelet local rpm
+  find:
+    paths: /data/install/k8s/kubelet
+    patterns: '*.rpm'
+  register: rpm
+
+- name: install kubelet local rpm
+  yum:
+    name: "{{ rpm.files | map(attribute='path') | list }}"
+    state: present
+
+# 安装kubectl离线包
+- name: find kubectl local rpm
+  find:
+    paths: /data/install/k8s/kubectl
+    patterns: '*.rpm'
+  register: rpm
+
+- name: install kubectl local rpm
+  yum:
+    name: "{{ rpm.files | map(attribute='path') | list }}"
+    state: present
+
+# 安装kubeadm离线包
+- name: find kubeadm local rpm
+  find:
+    paths: /data/install/k8s/kubeadm
+    patterns: '*.rpm'
+  register: rpm
+
+- name: install kubeadm local rpm
+  yum:
+    name: "{{ rpm.files | map(attribute='path') | list }}"
+    state: present

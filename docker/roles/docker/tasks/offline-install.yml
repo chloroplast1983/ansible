@@ -1,0 +1,21 @@
+# 创建安装目录
+- name: create docker install directory
+  file: path=/data/install state=directory mode=0755
+
+# 解压docker rmp包
+- name: unarchive docker rpm
+  unarchive:
+    src: docker-ce-18061.tar.gz
+    dest: /data/install
+
+# 安装docker离线包
+- name: find docker local rpm
+  find:
+    paths: /data/install/docker-ce
+    patterns: '*.rpm'
+  register: rpm
+
+- name: install docker local rpm
+  yum:
+    name: "{{ rpm.files | map(attribute='path') | list }}" 
+    state: present

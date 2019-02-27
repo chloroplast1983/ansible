@@ -1,10 +1,9 @@
-# 安装 docker 的 yum 源 (docker ce)
-- name: install docker ce repo
-  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+# 安装docker
+#- name: online install docker ce
+#  include_tasks: online-install.yml
 
-# 安装 docker-ce-18.06.1.ce
-- name: install docker ce-18.06.1.ce
-  yum: name=docker-ce-18.06.1.ce state=present
+- name: offline install docker ce
+  include_tasks: offline-install.yml
 
 # 开机启动docker
 - name: systemctl enable docker.service
@@ -34,7 +33,7 @@
 - name: cretae docker storage config file dir
   file: path=/etc/docker state=directory mode=0755
 
-- name: set up docker storage driver devicemapper
+- name: set up docker storage driver 
   template:
     src: docker.daemon.json.j2
     dest: /etc/docker/daemon.json

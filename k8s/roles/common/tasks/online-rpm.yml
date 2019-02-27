@@ -1,0 +1,19 @@
+# 添加k8s repo
+- name: k8s repo
+  yum_repository:
+    name: kubernetes
+    description: Kubernetes
+    baseurl: https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: yes
+    gpgkey: 
+      - https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+      - https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+
+- name: install kubelet kubeadm kubectl kubectl
+  yum: name={{item}} state=latest
+  with_items:
+    - kubeadm-1.13.3
+    - kubelet-1.13.3
+    - kubeadm-1.13.3

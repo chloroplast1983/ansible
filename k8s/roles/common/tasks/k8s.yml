@@ -1,0 +1,13 @@
+# 启动k8s
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload
+
+# 启动服务
+- name: restart kubelet
+  service: name={{ item }} state=started
+  with_items:
+    - kubelet
+  
+# 开机启动 kubellet
+- name: systemctl enable kubelet.service
+  command: systemctl enable kubelet.service

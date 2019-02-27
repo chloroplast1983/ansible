@@ -3,4 +3,5 @@
   hosts: servers
   become: true
   roles: 
-    - fluentd
+  #- fluentd
+    - password

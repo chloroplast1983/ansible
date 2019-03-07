@@ -66,4 +66,10 @@
 #### docker
 
 主要用于在服务器部署`docker`的生产环境. 针对`linux`版本为`centos 7 min`[docker play book](./docker "docker play book")
-## 
+
+### 加密
+
+* 加密`ansible`的`ssh_keys`服务器密钥
+* 加密密钥文件`ansible-vault encrypt xxx`
+* 编辑加密的密钥文件`ansible-vault edit`
+* 解密密钥文件`ansible-vault decrypt xxx`

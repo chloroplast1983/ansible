@@ -15,8 +15,8 @@
   include_tasks: locale_environment.yml
 
 # disable ping
-- name: disable ping
-  include_tasks: disable_ping.yml
+#- name: disable ping
+#  include_tasks: disable_ping.yml
 
 # configure connection timeout
 - name: configure time out 

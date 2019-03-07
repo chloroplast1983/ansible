@@ -2,6 +2,6 @@
   hosts: virtualserver
   become: true
   roles:
-    - virtual
+    # - virtual
     - common
-    - docker
+      #    - docker

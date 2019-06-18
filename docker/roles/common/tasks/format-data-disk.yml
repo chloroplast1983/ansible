@@ -1,3 +1,9 @@
+# install packages 
+- name: install required packages
+  yum: name={{item}} state=latest
+  with_items:
+    - lvm2
+
 # 硬盘分区
 - name: lvm data disk partion
   script: lvm-disk.sh "{{ disk }}" "{{ disk_data_partion }}"  ""
